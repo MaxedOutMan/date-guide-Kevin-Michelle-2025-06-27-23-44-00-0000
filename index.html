@@ -1,0 +1,3866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxed Out Date Nights - Kevin & Michelle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alata:wght@400&family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #2e2e36;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0c6175 0%, #094557 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-family: 'Alata', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        
+        .header .personalized {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .header .title {
+            font-family: 'Alata', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .header .divider {
+            width: 60px;
+            height: 3px;
+            background-color: #1aafe2;
+            margin: 20px auto;
+        }
+        
+        .header .tagline {
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 30px 20px;
+            background: white;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: #0c6175;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+        
+        .stat-card.go-out { background: #1aafe2; }
+        .stat-card.anywhere { background: #e87b4c; }
+        
+        .stat-number {
+            font-family: 'Alata', sans-serif;
+            font-size: 48px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Controls */
+        .controls {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            margin-bottom: 15px;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: #1aafe2;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .filter-btn:hover {
+            border-color: #1aafe2;
+        }
+        
+        .filter-btn.active {
+            background: #0c6175;
+            color: white;
+            border-color: #0c6175;
+        }
+        
+        .filter-btn.active.go-out { background: #1aafe2; border-color: #1aafe2; }
+        .filter-btn.active.anywhere { background: #e87b4c; border-color: #e87b4c; }
+        
+        /* Date Cards */
+        .dates-container {
+            padding: 0 20px 40px;
+        }
+        
+        .date-card {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .date-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .date-header {
+            background: #0c6175;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .date-header.go-out { background: #1aafe2; }
+        .date-header.anywhere { background: #e87b4c; }
+        
+        .date-number {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .date-category {
+            font-size: 13px;
+        }
+        
+        .date-body {
+            padding: 25px;
+        }
+        
+        .date-title {
+            font-family: 'Alata', sans-serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2e2e36;
+        }
+        
+        .date-vibe {
+            color: #0c6175;
+            font-style: italic;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .date-description {
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .date-section {
+            margin-bottom: 20px;
+        }
+        
+        .date-section h4 {
+            color: #0c6175;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .date-section p {
+            color: #2e2e36;
+            line-height: 1.6;
+        }
+        
+        .date-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #f0e6e6;
+            font-size: 14px;
+            color: #6b6b6b;
+        }
+        
+        .meta-item strong {
+            color: #4a5568;
+            font-weight: 600;
+        }
+        
+        .meta-separator {
+            color: #d4a5a5;
+        }
+        
+        .maps-button {
+            display: inline-block;
+            background: #1aafe2;
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        .maps-button:hover {
+            background: #1597c7;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2e2e36;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer h3 {
+            font-family: 'Alata', sans-serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer p {
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #1aafe2;
+            text-decoration: none;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header .title { font-size: 36px; }
+            .stat-card { padding: 20px 30px; min-width: 120px; }
+            .stat-number { font-size: 36px; }
+            .date-title { font-size: 20px; }
+            .filter-buttons { justify-content: center; }
+        }
+        
+        /* Hidden class for filtering */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MAXED OUT DATE NIGHTS</h1>
+        <p class="personalized">PERSONALIZED FOR KEVIN & MICHELLE</p>
+        <h2 class="title">YOUR PERSONAL 101<br>DATE NIGHT BLUEPRINT</h2>
+        <div class="divider"></div>
+        <p class="tagline">FORGE STRONGER CONNECTIONS. BUILD A LEGACY.</p>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">34</div>
+            <div class="stat-label">🏠 Stay-In Dates</div>
+        </div>
+        <div class="stat-card go-out">
+            <div class="stat-number">31</div>
+            <div class="stat-label">📍 Go-Out Dates</div>
+        </div>
+        <div class="stat-card anywhere">
+            <div class="stat-number">36</div>
+            <div class="stat-label">✨ Do Anywhere</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <input type="text" class="search-bar" placeholder="Search dates by name, activity, or keyword..." id="searchBar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Dates</button>
+            <button class="filter-btn" data-filter="stay-in">🏠 Stay-In</button>
+            <button class="filter-btn" data-filter="go-out">📍 Go-Out</button>
+            <button class="filter-btn" data-filter="do-anywhere">✨ Anywhere</button>
+        </div>
+        <div class="filter-buttons" style="margin-top: 15px;">
+            <button class="filter-btn budget-btn active" data-budget="all">All Budgets</button>
+            <button class="filter-btn budget-btn" data-budget="$">$ ($0-20)</button>
+            <button class="filter-btn budget-btn" data-budget="$$">$$ ($20-50)</button>
+            <button class="filter-btn budget-btn" data-budget="$$$">$$$ ($50-100)</button>
+            <button class="filter-btn budget-btn" data-budget="$$$$">$$$$ ($100+)</button>
+        </div>
+    </div>
+    
+    <div class="dates-container" id="datesContainer">
+        
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="hiking photography expedition   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #1</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Hiking Photography Expedition</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$$" data-search="cross-country skiing lesson   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #2</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Cross-Country Skiing Lesson</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Cross-Country%20Skiing%20Lesson%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$$" data-search="drive-in double feature   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #3</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Drive-In Double Feature</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Drive-In%20Double%20Feature%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="classic diner experience   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #4</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Classic Diner Experience</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Classic%20Diner%20Experience%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="drive-in diner hop   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #5</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Drive-In Diner Hop</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="high school football game   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #6</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">High School Football Game</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/High%20School%20Football%20Game%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="late night diner run   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #7</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Late Night Diner Run</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="starlight drive-in   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #8</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Starlight Drive-In</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Starlight%20Drive-In%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="baseball batting cages   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #9</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Baseball Batting Cages</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Baseball%20Batting%20Cages%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="classic diner hop   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #10</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Classic Diner Hop</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Classic%20Diner%20Hop%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="double feature drive-in   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #11</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Double Feature Drive-In</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Double%20Feature%20Drive-In%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="afternoon tea experience this date invites you to slow down and indulge in a refined yet cozy experience that transforms an ordinary afternoon into something special. whether you choose an elegant tea room with vintage china or a quirky spot that puts their own spin on tradition, the ritual of afternoon tea creates a bubble of tranquility in your busy lives. the careful presentation of tiered treats, the aromatic selection of teas, and the unhurried pace naturally encourage meaningful conversation and genuine connection. you'll find yourselves savoring not just the delicate sandwiches and pastries, but also each other's company in a way that rarely happens in everyday life. the slightly formal atmosphere gives you permission to be present, put away phones, and treat your time together as the luxury it truly is. between sharing bites and debating whether jam or cream goes first on scones, you'll rediscover the art of slow dating and leave feeling more connected than when you arrived. relaxed, intimate, slightly fancy, and filled with warm conversation. the setting invites mindfulness, sophistication, and a delightful touch of romance that feels both special and comfortable. choose a venue with atmosphere over just any place serving tea‚äîambiance matters here. make reservations, especially for weekends when popular spots fill quickly. dress nicely but comfortably to match the elevated mood. come hungry as portions are generous despite appearing dainty. share everything to taste more variety. pace yourselves‚äîthis is about lingering, not rushing. put phones away except for one photo of the spread.">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #12</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Afternoon Tea Experience</h3>
+                    <p class="date-vibe">Relaxed, intimate, slightly fancy, and filled with warm conversation. The setting invites mindfulness, sophistication, and a delightful touch of romance that feels both special and comfortable.</p>
+                    <p class="date-description">This date invites you to slow down and indulge in a refined yet cozy experience that transforms an ordinary afternoon into something special. Whether you choose an elegant tea room with vintage china or a quirky spot that puts their own spin on tradition, the ritual of afternoon tea creates a bubble of tranquility in your busy lives. The careful presentation of tiered treats, the aromatic selection of teas, and the unhurried pace naturally encourage meaningful conversation and genuine connection. You'll find yourselves savoring not just the delicate sandwiches and pastries, but also each other's company in a way that rarely happens in everyday life. The slightly formal atmosphere gives you permission to be present, put away phones, and treat your time together as the luxury it truly is. Between sharing bites and debating whether jam or cream goes first on scones, you'll rediscover the art of slow dating and leave feeling more connected than when you arrived.</p>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Make It Happen</h4>
+                        <p>Choose a venue with atmosphere over just any place serving tea‚Äîambiance matters here. Make reservations, especially for weekends when popular spots fill quickly. Dress nicely but comfortably to match the elevated mood. Come hungry as portions are generous despite appearing dainty. Share everything to taste more variety. Pace yourselves‚Äîthis is about lingering, not rushing. Put phones away except for one photo of the spread.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Pro Tips</h4>
+                        <p>Ask servers for tea recommendations based on preferences. Request a corner table or booth for intimacy. The bottom tier is usually savory‚Äîstart there and work up to sweets.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Perfect For</h4>
+                        <p>Ideal for celebrating small victories, reconnecting after busy periods, rainy afternoons, or when you need elegance without breaking the bank. Perfect for couples who appreciate life's finer moments.</p>
+                    </div>
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Afternoon%20Tea%20Experience%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="competitive cook-off challenge transform your kitchen into a culinary battleground where love meets competition and creativity meets chaos. this high-energy date pits partners against each other in a cook-off that tests skills, creativity, and grace under pressure. using identical ingredients or choosing signature dishes, you'll have a set time to create your masterpiece while engaging in playful sabotage and dramatic commentary. the kitchen fills with competing aromas, energetic music, and lots of laughter as you race against time and each other. the blind taste test judgment adds legitimate suspense‚äîwill technique triumph over creativity? between the trash talk, the frantic chopping, and the inevitable moments where you sneak tastes of each other's creations, you'll bond through shared chaos. win or lose, you both get to enjoy the fruits of your labor, and the winner earns bragging rights plus freedom from dish duty. playful, high-energy, deliciously competitive, and surprisingly intimate. your kitchen becomes a stage where culinary creativity meets relationship playfulness in the best possible way. prep the kitchen battlefield beforehand‚äîclear counters, organize tools, ensure enough supplies for both. set clear rules about time limits, ingredient sharing, and acceptable sabotage levels. create scoring criteria together: taste, presentation, creativity, effort. play upbeat music to maintain energy. take photos throughout for future blackmail material. have backup takeout planned in case of dual disasters. remember fun trumps perfection.">
+                <div class="date-header ">
+                    <span class="date-number">DATE #13</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Competitive Cook-Off Challenge</h3>
+                    <p class="date-vibe">Playful, high-energy, deliciously competitive, and surprisingly intimate. Your kitchen becomes a stage where culinary creativity meets relationship playfulness in the best possible way.</p>
+                    <p class="date-description">Transform your kitchen into a culinary battleground where love meets competition and creativity meets chaos. This high-energy date pits partners against each other in a cook-off that tests skills, creativity, and grace under pressure. Using identical ingredients or choosing signature dishes, you'll have a set time to create your masterpiece while engaging in playful sabotage and dramatic commentary. The kitchen fills with competing aromas, energetic music, and lots of laughter as you race against time and each other. The blind taste test judgment adds legitimate suspense‚Äîwill technique triumph over creativity? Between the trash talk, the frantic chopping, and the inevitable moments where you sneak tastes of each other's creations, you'll bond through shared chaos. Win or lose, you both get to enjoy the fruits of your labor, and the winner earns bragging rights plus freedom from dish duty.</p>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Make It Happen</h4>
+                        <p>Prep the kitchen battlefield beforehand‚Äîclear counters, organize tools, ensure enough supplies for both. Set clear rules about time limits, ingredient sharing, and acceptable sabotage levels. Create scoring criteria together: taste, presentation, creativity, effort. Play upbeat music to maintain energy. Take photos throughout for future blackmail material. Have backup takeout planned in case of dual disasters. Remember fun trumps perfection.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Pro Tips</h4>
+                        <p>Simple dishes prevent frustration‚Äîsave the souffl√©s for cooperation nights. Assign separate prep areas to avoid collision conflicts. Timer apps prevent cheating. Aprons make cleanup easier and photos funnier.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Perfect For</h4>
+                        <p>Perfect for couples who thrive on friendly competition, need to spice up routine dinner prep, enjoy cooking shows, or want to discover hidden culinary talents in each other.</p>
+                    </div>
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="anniversary battle planning turn the typically mundane task of planning into an adventure itself with strategic thinking and playful creativity. this date reimagines anniversary planning as a fun military operation where you both present competing visions before negotiating the perfect celebration together. armed with laptops, pinterest boards, and perhaps some wine, you'll pitch dream scenarios complete with budgets, timelines, and contingency plans. the presentation aspect adds excitement‚äîcreate powerpoints, vision boards, or even interpretive dances to sell your ideas. through playful debate and strategic compromise, you'll discover what really matters to both of you while building anticipation for the actual event. the collaborative nature transforms potential stress into shared excitement, and the silly elements keep it light even when discussing logistics. by the end, you'll have a plan that reflects both personalities and a deeper understanding of each other's celebration styles. strategic, romantic, playfully competitive, and surprisingly revealing. planning becomes foreplay as you dream together and negotiate your perfect shared celebration. set presentation time limits to maintain energy and prevent overthinking. use visual aids‚äîpinterest boards, magazine cutouts, or digital presentations‚äîto bring ideas to life. create categories for must-haves versus nice-to-haves. include reality checks on budgets without killing dreams. build in compromise mechanisms like taking turns or point systems. toast your final plan with something special. save all materials for post-anniversary comparison.">
+                <div class="date-header ">
+                    <span class="date-number">DATE #14</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Anniversary Battle Planning</h3>
+                    <p class="date-vibe">Strategic, romantic, playfully competitive, and surprisingly revealing. Planning becomes foreplay as you dream together and negotiate your perfect shared celebration.</p>
+                    <p class="date-description">Turn the typically mundane task of planning into an adventure itself with strategic thinking and playful creativity. This date reimagines anniversary planning as a fun military operation where you both present competing visions before negotiating the perfect celebration together. Armed with laptops, Pinterest boards, and perhaps some wine, you'll pitch dream scenarios complete with budgets, timelines, and contingency plans. The presentation aspect adds excitement‚Äîcreate PowerPoints, vision boards, or even interpretive dances to sell your ideas. Through playful debate and strategic compromise, you'll discover what really matters to both of you while building anticipation for the actual event. The collaborative nature transforms potential stress into shared excitement, and the silly elements keep it light even when discussing logistics. By the end, you'll have a plan that reflects both personalities and a deeper understanding of each other's celebration styles.</p>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Make It Happen</h4>
+                        <p>Set presentation time limits to maintain energy and prevent overthinking. Use visual aids‚ÄîPinterest boards, magazine cutouts, or digital presentations‚Äîto bring ideas to life. Create categories for must-haves versus nice-to-haves. Include reality checks on budgets without killing dreams. Build in compromise mechanisms like taking turns or point systems. Toast your final plan with something special. Save all materials for post-anniversary comparison.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Pro Tips</h4>
+                        <p>Start planning at least three months early for best results. Include both practical elements and wild dreams. Screenshot everything for reference. Consider separate surprise elements you each plan secretly.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Perfect For</h4>
+                        <p>Ideal for couples approaching anniversaries, birthdays, or special trips. Perfect when you want to share planning responsibilities and ensure both voices are heard in celebration design.</p>
+                    </div>
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="vintage treasure hunt transform bargain hunting into an adventure that combines nostalgia, competition, and discovery. this date sends you on a treasure hunt through thrift stores, antique shops, and vintage markets with specific missions that turn shopping into a game. whether you're racing to find the most ridiculous item under $5, hunting for the perfect gift for each other, or creating complete outfits for imaginary characters, every discovery becomes part of your shared story. the joy comes not from what you buy but from what you find‚äîmysterious objects that spark wild backstory inventions, clothing that triggers childhood memories, and treasures that perfectly capture inside jokes. between the friendly competition, the people watching, and the thrill of discovery, you'll create new memories while literally handling pieces of the past. the stories you invent for your finds often become more valuable than the items themselves. nostalgic, adventurous, creatively competitive, and delightfully unpredictable. thrift stores become treasure maps where every aisle might hold your next inside joke or apartment conversation piece. set clear missions and budgets before starting to add structure to chaos. visit multiple store types for variety‚äîvintage clothing, antiques, books, and oddities. create categories for competition: weirdest, most romantic, best value, most mysterious. document finds with photos even if you don't buy. sanitize purchases before bringing home. save receipts for potential returns. end with coffee to compare treasures and declare winners.">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #15</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Vintage Treasure Hunt</h3>
+                    <p class="date-vibe">Nostalgic, adventurous, creatively competitive, and delightfully unpredictable. Thrift stores become treasure maps where every aisle might hold your next inside joke or apartment conversation piece.</p>
+                    <p class="date-description">Transform bargain hunting into an adventure that combines nostalgia, competition, and discovery. This date sends you on a treasure hunt through thrift stores, antique shops, and vintage markets with specific missions that turn shopping into a game. Whether you're racing to find the most ridiculous item under $5, hunting for the perfect gift for each other, or creating complete outfits for imaginary characters, every discovery becomes part of your shared story. The joy comes not from what you buy but from what you find‚Äîmysterious objects that spark wild backstory inventions, clothing that triggers childhood memories, and treasures that perfectly capture inside jokes. Between the friendly competition, the people watching, and the thrill of discovery, you'll create new memories while literally handling pieces of the past. The stories you invent for your finds often become more valuable than the items themselves.</p>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Make It Happen</h4>
+                        <p>Set clear missions and budgets before starting to add structure to chaos. Visit multiple store types for variety‚Äîvintage clothing, antiques, books, and oddities. Create categories for competition: weirdest, most romantic, best value, most mysterious. Document finds with photos even if you don't buy. Sanitize purchases before bringing home. Save receipts for potential returns. End with coffee to compare treasures and declare winners.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Pro Tips</h4>
+                        <p>Hit estate sales early Saturday mornings for best selection. Cash is king at many vintage spots. Background stories make everything more fun. One person's trash really is another's treasure here.</p>
+                    </div>
+                    
+                    
+                    <div class="date-section">
+                        <h4>Perfect For</h4>
+                        <p>Perfect for weekend adventures, couples who love stories behind objects, those decorating on a budget, or anyone who believes the hunt matters more than the prize.</p>
+                    </div>
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3-4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="home gym power hour   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #16</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Home Gym Power Hour</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="room renovation summit   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #17</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Room Renovation Summit</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="arcade bar championship   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #18</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Arcade Bar Championship</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2-3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Arcade%20Bar%20Championship%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="art gallery wine walk   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #19</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Art Gallery Wine Walk</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Art%20Gallery%20Wine%20Walk%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="food truck championship   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #20</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Food Truck Championship</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="hardware store dream date   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #21</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Hardware Store Dream Date</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Hardware%20Store%20Dream%20Date%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="stargazing & sips   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #22</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Stargazing & Sips</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="dance floor takeover   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #23</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Dance Floor Takeover</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="escape room double date   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #24</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Escape Room Double Date</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Escape%20Room%20Double%20Date%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="spa night trade-off   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #25</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Spa Night Trade-Off</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="backroads bar adventure   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #26</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Backroads Bar Adventure</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="backyard olympics   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #27</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Backyard Olympics</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="strategic game night   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #28</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Strategic Game Night</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="bake-off battle   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #29</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Bake-Off Battle</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="bbq & beverage pairing   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #30</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">BBQ & Beverage Pairing</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="sunrise summit breakfast   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #31</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Sunrise Summit Breakfast</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="thrift shop fashion war   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #32</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Thrift Shop Fashion War</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="project planning superstore   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #33</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Project Planning Superstore</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Project%20Planning%20Superstore%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="secret swimming spot   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #34</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Secret Swimming Spot</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="brewery game tournament   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #35</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Brewery Game Tournament</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Brewery%20Game%20Tournament%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="bible study & brunch   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #36</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Bible Study & Brunch</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$$" data-search="bike trail brewery tour   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #37</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Bike Trail Brewery Tour</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="blind taste test night   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #38</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Blind Taste Test Night</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="board game cafe marathon   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #39</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Board Game Cafe Marathon</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Board%20Game%20Cafe%20Marathon%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="bookstore scavenger hunt   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #40</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Bookstore Scavenger Hunt</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Bookstore%20Scavenger%20Hunt%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="bowling & betting   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #41</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Bowling & Betting</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Bowling%20%26%20Betting%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="breakfast restaurant tour   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #42</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Breakfast Restaurant Tour</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="budget shopping challenge   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #43</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Budget Shopping Challenge</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="build a blanket fort   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #44</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Build a Blanket Fort</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="cake decorating disaster   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #45</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Cake Decorating Disaster</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="camera phone photo walk   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #46</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Camera Phone Photo Walk</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="campfire & cocktails   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #47</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Campfire & Cocktails</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="canning & preserving party   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #48</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Canning & Preserving Party</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="card game strip poker   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #49</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Card Game Strip Poker</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="cheap eats challenge   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #50</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Cheap Eats Challenge</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$$" data-search="cheese & wine education   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #51</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Cheese & Wine Education</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$$" data-search="christian concert experience   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #52</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Christian Concert Experience</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Christian%20Concert%20Experience%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="church hop sunday   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #53</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Church Hop Sunday</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="city scavenger hunt   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #54</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">City Scavenger Hunt</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="clothing swap fashion show   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #55</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Clothing Swap Fashion Show</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="coffee shop crawl   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #56</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Coffee Shop Crawl</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="community service date   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #57</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Community Service Date</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="competitive mini golf   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #58</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Competitive Mini Golf</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Competitive%20Mini%20Golf%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="cookie decorating war   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #59</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Cookie Decorating War</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="costume shop adventure   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #60</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Costume Shop Adventure</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Costume%20Shop%20Adventure%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="country road cruise   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #61</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Country Road Cruise</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="couples paint & sip   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #62</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Couples Paint & Sip</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Couples%20Paint%20%26%20Sip%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="craft beer flight night   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #63</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Craft Beer Flight Night</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="create couple's cookbook   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #64</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Create Couple's Cookbook</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="creek walk & wading   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #65</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Creek Walk & Wading</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="crossword competition   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #66</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Crossword Competition</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="dance class drop-in   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #67</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Dance Class Drop-In</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1.5 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Dance%20Class%20Drop-In%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="dessert hopping   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #68</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Dessert Hopping</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2.5 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="diy home spa retreat   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #69</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">DIY Home Spa Retreat</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="dog park puppy therapy   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #70</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Dog Park Puppy Therapy</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="dollar menu gourmet   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #71</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Dollar Menu Gourmet</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="dream house design   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #72</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Dream House Design</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="early morning fishing   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #73</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Early Morning Fishing</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="estate sale treasure hunt   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #74</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Estate Sale Treasure Hunt</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="evening worship & prayer   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #75</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Evening Worship & Prayer</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="extreme couponing trip   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #76</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Extreme Couponing Trip</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="face mask & movies   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #77</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Face Mask & Movies</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="fall foliage photo shoot   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #78</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Fall Foliage Photo Shoot</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="fantasy football draft party   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #79</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Fantasy Football Draft Party</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="farm stand road trip   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #80</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Farm Stand Road Trip</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="farmers market challenge   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #81</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Farmers Market Challenge</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Farmers%20Market%20Challenge%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$$" data-search="fashion show fundraiser   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #82</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Fashion Show Fundraiser</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Fashion%20Show%20Fundraiser%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="ferris wheel & fairgrounds   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #83</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Ferris Wheel & Fairgrounds</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Ferris%20Wheel%20%26%20Fairgrounds%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="firepit philosophy night   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #84</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Firepit Philosophy Night</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$$" data-search="first date recreation   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #85</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">First Date Recreation</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Flexible
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="fitness challenge date   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #86</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Fitness Challenge Date</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$$" data-search="float trip adventure   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #87</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Float Trip Adventure</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 6 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $50-100
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="food preservation workshop   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #88</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Food Preservation Workshop</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="foreign film night   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #89</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Foreign Film Night</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$" data-search="fort building championship   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #90</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Fort Building Championship</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="free concert in park   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #91</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Free Concert in Park</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Free%20Concert%20in%20Park%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="furniture restoration project   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #92</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Furniture Restoration Project</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="game night restaurant tour   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #93</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Game Night Restaurant Tour</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 4 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$" data-search="garden center dreams   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #94</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Garden Center Dreams</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Garden%20Center%20Dreams%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="geocaching adventure   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #95</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Geocaching Adventure</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$$" data-search="ghost kitchen crawl   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #96</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Ghost Kitchen Crawl</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="glow-in-dark activities   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #97</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Glow-in-Dark Activities</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Glow-in-Dark%20Activities%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="do-anywhere" data-budget="$" data-search="gratitude walk & talk   ">
+                <div class="date-header anywhere">
+                    <span class="date-number">DATE #98</span>
+                    <span class="date-category">✨ Anywhere</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Gratitude Walk & Talk</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 1 hour
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $0-20
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Outdoors
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="stay-in" data-budget="$$" data-search="grilling competition   ">
+                <div class="date-header ">
+                    <span class="date-number">DATE #99</span>
+                    <span class="date-category">🏠 Stay-In</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Grilling Competition</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 3 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> At Home
+                        </span>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="group dance class   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #100</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Group Dance Class</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Group%20Dance%20Class%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+            <div class="date-card" data-category="go-out" data-budget="$$" data-search="gun range training   ">
+                <div class="date-header go-out">
+                    <span class="date-number">DATE #101</span>
+                    <span class="date-category">📍 Go-Out</span>
+                </div>
+                <div class="date-body">
+                    <h3 class="date-title">Gun Range Training</h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="date-meta">
+                        <span class="meta-item">
+                            <strong>Time:</strong> 2 hours
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Budget:</strong> $20-50
+                        </span>
+                        <span class="meta-separator">•</span>
+                        <span class="meta-item">
+                            <strong>Location:</strong> Local Place
+                        </span>
+                    </div>
+                    
+                    
+                    <a href="https://www.google.com/maps/search/Gun%20Range%20Training%20near%20Bozeman%2C%20Montana" 
+                       target="_blank" class="maps-button">📍 Find Places Near You</a>
+                </div>
+            </div>
+    </div>
+    
+    <div class="footer">
+        <h3>MAXED OUT DATE NIGHTS</h3>
+        <p>© Maxed Out Man • <a href="https://MaxedOutMan.com">MaxedOutMan.com</a></p>
+    </div>
+    
+    <script>
+        // Get elements
+        const searchBar = document.getElementById('searchBar');
+        const datesContainer = document.getElementById('datesContainer');
+        const dateCards = datesContainer.querySelectorAll('.date-card');
+        
+        // Debug: Check budget values
+        console.log('Total date cards:', dateCards.length);
+        const budgetValues = new Set();
+        dateCards.forEach(card => {
+            const budget = card.getAttribute('data-budget');
+            budgetValues.add(budget);
+        });
+        console.log('Unique budget values found:', Array.from(budgetValues));
+        
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn:not(.budget-btn)');
+        const budgetButtons = document.querySelectorAll('.budget-btn');
+        let currentCategoryFilter = 'all';
+        let currentBudgetFilter = 'all';
+        
+        function applyFilters() {
+            dateCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const budget = card.getAttribute('data-budget');
+                const searchTerm = searchBar.value.toLowerCase();
+                const searchData = card.getAttribute('data-search');
+                
+                let showByCategory = currentCategoryFilter === 'all' || category === currentCategoryFilter;
+                let showByBudget = currentBudgetFilter === 'all' || budget === currentBudgetFilter;
+                let showBySearch = searchTerm === '' || searchData.includes(searchTerm);
+                
+                if (showByCategory && showByBudget && showBySearch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentCategoryFilter = this.getAttribute('data-filter');
+                applyFilters();
+            });
+        });
+        
+        budgetButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                budgetButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentBudgetFilter = this.getAttribute('data-budget');
+                applyFilters();
+            });
+        });
+        
+        searchBar.addEventListener('input', function() {
+            applyFilters();
+        });
+    </script>
+</body>
+</html>
